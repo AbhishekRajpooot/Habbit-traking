@@ -1,0 +1,8 @@
+Problem Statement
+
+A view to display 7 days of each habit 
+show today where user can mark todays habitAnd show the previous 6 days and the status of that habit for each day 
+A user can toggle between the three (above mentioned) statuses of a habit i.e. I can change today's status as done, not done or non anytime.
+Also i  should be able to change any of the previous days status i.e. I can change the status of a habit for yesterday, day before yesterday or any previous 6 days as well
+
+You can keep track of the longest streak and the number of days the user completed that habit since the user created the habit

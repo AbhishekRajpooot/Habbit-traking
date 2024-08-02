@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habbit Details</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+ 
+</head>
+<body>
+    <a href="/habbits/prev/<%=habit._id%>/<%=statusArr[statusArr.length-1].date%>">Prev Days</a>
+    </a>
+    
+    <a href="/habbits/next/<%=habit._id%>/<%=statusArr[0].date%>">Next Days</a>
+    </a>
+    <h1><%=habit.name%></h1>
+    <%statusArr.forEach(d=>{%>
+        <p><%=d.date%></p>
+        <p><button
+            class="<%= d.state ==='Done'?'btn btn-primary': d.state==='Not Done'?'btn btn-danger':'btn btn-secondary'%>"
+            id="<%=d.date%><%=habit._id%>"
+            onclick="toggleButton('<%=d.date%>','<%=habit._id%>')">
+            <%=d.state%>
+        </button></p>
+
+    <%})%>
+    <script>
+        async function toggleButton(date,habbit_id){
+            const resp = await fetch(`/habbits/${habbit_id}/${date}`,{
+                method:"POST"
+            });
+            const state = await resp.json();
+
+            console.log(state,"check");
+            const btn = document.getElementById(`${date}${habbit_id}`)
+            btn.innerText=state;
+            btn.className =state === 'Done' ? 'btn btn-primary' : state === 'Not Done' ? 'btn btn-danger':'btn btn-secondary';
+
+            
+        }
+    </script>
+    
+</body>
+</html>
